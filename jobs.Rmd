@@ -6,7 +6,7 @@ output: ''
 Load different packages that will use in this model:
 
 ```{r}
-pkg_list = c("ggplot2")
+pkg_list = c("ggplot2","plyr")
 mia_pkgs = pkg_list[!(pkg_list %in% installed.packages()[,"Package"])]
 if(length(mia_pkgs) > 0) install.packages(mia_pkgs)
 loaded_pkgs = lapply(pkg_list, require, character.only=TRUE)
@@ -14,9 +14,16 @@ loaded_pkgs = lapply(pkg_list, require, character.only=TRUE)
 
 Set up the data:
 ```{r}
-jdata = read.csv()
+jdata = read.csv("datarelatedjobs.csv")
 names(jdata)
+length(jdata$Standing)
+```
+
+An overview of job data:
+
+```{r}
 summary(jdata)
+head(jdata)
 ```
 
 Comparing between companies in the North and the South of California (using side-by-side histogram):
@@ -25,7 +32,18 @@ Comparing between companies in the North and the South of California (using side
 - Number of Bachelor's, Master's, Ph.D that companies recruiting in North vs South. (All levels = add 1 to every value)
 - Average salary in North vs South
 
+```{r}
+bache = rep(0, 400)
+mastr = rep(0, 400)
+phd   = rep(0, 400)
+count(jdata$Standing)
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
 Plot a histogram to see the prefer language for both prefer language 1 and prefer language 2
+
+
 
 Write function to find out suitable companies: "find_company" that has 4 agrument. Minimum standing, experience, region, best language. It will return the dataframe that has all the company that fit our agruments
 
